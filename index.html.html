@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kelas Pintar — Matematika Dasar</title>
+<style>
+:root{--ink:#263653;--muted:#71809a;--blue:#4c83ed;--blue2:#eaf1ff;--yellow:#ffd96a;--green:#24a879;--red:#e45c67;--paper:#fff}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#f3f7ff;color:var(--ink);font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif}
+.top{height:12px;background:linear-gradient(90deg,#ffce55 0 25%,#54c5b2 25% 50%,#6b93f3 50% 75%,#f28d9c 75%)}
+.wrap{width:min(1050px,100% - 28px);margin:24px auto 45px}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:52px;height:52px;border-radius:16px;background:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 5px 18px #375d9818}
+h1{font-size:clamp(22px,4vw,30px);margin:0;color:#31517d}.subtitle{font-size:12px;color:var(--muted);letter-spacing:1.1px}
+.sound{border:1px solid #dce5f4;background:white;color:#49617f;padding:10px 13px;border-radius:12px;font-weight:700;cursor:pointer}
+.layout{display:grid;grid-template-columns:245px 1fr;gap:18px;align-items:start}
+.side,.main{background:white;border:1px solid #e4eaf5;border-radius:22px;box-shadow:0 10px 30px #395b8c0b}
+.side{padding:18px}.side h3{font-size:14px;margin:0 0 12px;color:#60718d}
+.topic{width:100%;border:0;background:#f4f7fc;padding:12px;border-radius:12px;text-align:left;margin:5px 0;color:#536580;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px}
+.topic.active{background:#eaf1ff;color:#386fe0;outline:2px solid #d5e3ff}
+.topic span:first-child{font-size:19px;width:24px;text-align:center}
+.side-note{margin-top:17px;padding:13px;background:#fff8df;border-radius:13px;color:#806a2d;font-size:12px;line-height:1.5}
+.main{padding:clamp(18px,4vw,34px);min-height:540px}
+.stats{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.stat{background:#f5f8fe;border-radius:12px;padding:9px 12px;font-size:12px;color:#6b7a94}.stat b{color:#385c9b;font-size:14px;margin-left:4px}
+.progress{height:9px;background:#edf1f8;border-radius:20px;overflow:hidden;margin-bottom:26px}.bar{height:100%;width:0;background:linear-gradient(90deg,#5cc9b4,#6c93f2);border-radius:20px;transition:width .3s}
+.question-head{display:flex;justify-content:space-between;align-items:center;gap:10px;color:#77869d;font-size:13px;margin-bottom:12px}
+.level{background:#fff4ce;color:#8a6b1d;padding:6px 10px;border-radius:20px;font-weight:800;font-size:11px}
+.question{background:linear-gradient(135deg,#f1f6ff,#f8fbff);border:1px dashed #cbdaf4;border-radius:18px;padding:25px 12px;text-align:center;margin-bottom:18px}
+.prompt{font-size:13px;color:#7384a0;margin-bottom:12px}.equation{font-size:clamp(38px,8vw,60px);font-weight:900;letter-spacing:2px;color:#345b9b}.equation .op{color:#e99b37}
+.answer-row{display:flex;gap:10px;max-width:430px;margin:0 auto}.answer{width:100%;min-width:0;border:2px solid #dce5f3;border-radius:13px;padding:15px 14px;font-size:23px;font-weight:800;color:#304b76;text-align:center;outline:none}.answer:focus{border-color:#7fa5f4;box-shadow:0 0 0 4px #7fa5f422}
+.submit{border:0;border-radius:13px;background:#4d83eb;color:white;font-weight:900;padding:0 22px;cursor:pointer;font-size:15px;box-shadow:0 5px 12px #4d83eb33}.submit:hover{background:#3b72da}
+.feedback{display:none;margin:16px auto 0;max-width:540px;padding:14px 16px;border-radius:14px;font-size:14px;line-height:1.5}.feedback.good{display:block;background:#e8f8f1;color:#187a57;border:1px solid #c7eedc}.feedback.bad{display:block;background:#fff0f0;color:#a53d48;border:1px solid #f4d2d5}
+.explain{font-size:13px;margin-top:5px;color:inherit}
+.actions{display:flex;justify-content:center;gap:9px;margin-top:17px;flex-wrap:wrap}.secondary{border:1px solid #dbe4f1;background:white;color:#5b6e8c;border-radius:11px;padding:11px 17px;font-weight:800;cursor:pointer}.next{display:none;background:#25a77c;color:white;border:0;border-radius:11px;padding:11px 20px;font-weight:900;cursor:pointer}
+.footer{text-align:center;color:#98a5b8;font-size:11px;margin-top:18px}
+@media(max-width:700px){.layout{grid-template-columns:1fr}.side{padding:13px}.side h3{margin-bottom:8px}.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}.topic{margin:0;padding:10px}.side-note{display:none}.main{min-height:480px}header{margin-bottom:14px}}
+</style></head>
+<body><div class="top"></div><div class="wrap">
+<header><div class="brand"><div class="logo">📚</div><div><h1>Kelas Pintar</h1><div class="subtitle">BELAJAR MATEMATIKA JADI MENYENANGKAN</div></div></div><button class="sound" id="soundBtn">🔊 Suara: Aktif</button></header>
+<div class="layout">
+<aside class="side"><h3>PILIH MATERI</h3><div class="topics">
+<button class="topic active" data-mode="mix"><span>🎯</span> Campuran</button>
+<button class="topic" data-mode="add"><span>➕</span> Penjumlahan</button>
+<button class="topic" data-mode="sub"><span>➖</span> Pengurangan</button>
+<button class="topic" data-mode="mul"><span>✖️</span> Perkalian</button>
+<button class="topic" data-mode="div"><span>➗</span> Pembagian</button>
+</div><div class="side-note">💡 <b>Tips belajar:</b><br>Kerjakan dengan teliti. Jika jawabanmu belum tepat, baca petunjuk koreksi dan coba pahami langkah hitungnya.</div></aside>
+<main class="main">
+<div class="stats"><div class="stat">⭐ Skor <b id="score">0</b></div><div class="stat">✅ Benar <b id="correct">0</b></div><div class="stat">📝 Soal <b id="count">1 / 10</b></div><div class="stat">🔥 Rangkaian <b id="streak">0</b></div></div>
+<div class="progress"><div class="bar" id="bar"></div></div>
+<div class="question-head"><span id="topicLabel">LATIHAN CAMPURAN</span><span class="level" id="level">LEVEL 1 · MUDAH</span></div>
+<section class="question"><div class="prompt">Berapakah hasil dari operasi berikut?</div><div class="equation" id="equation">8 <span class="op">+</span> 7 = ?</div></section>
+<form id="form" class="answer-row"><input class="answer" id="answer" type="number" step="1" inputmode="numeric" placeholder="Jawabanmu..." autocomplete="off" required><button class="submit" type="submit">Periksa</button></form>
+<div class="feedback" id="feedback" aria-live="polite"></div>
+<div class="actions"><button class="secondary" id="hint">💡 Petunjuk</button><button class="next" id="next">Soal berikutnya →</button></div>
+<div class="footer">Tidak perlu terburu-buru. Setiap kesalahan adalah kesempatan untuk belajar! ✏️</div>
+</main></div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+let mode='mix',q=null,score=0,correct=0,count=1,streak=0,answered=false,soundOn=true,level=1,hintUsed=false;
+const modes={mix:'LATIHAN CAMPURAN',add:'PENJUMLAHAN',sub:'PENGURANGAN',mul:'PERKALIAN',div:'PEMBAGIAN'};
+const rand=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+function makeQuestion(){
+ let op=mode==='mix'?['add','sub','mul','div'][rand(0,3)]:mode,a,b,ans;
+ let max=level===1?10:level===2?25:level===3?50:100;
+ if(op==='add'){a=rand(1,max);b=rand(1,max);ans=a+b}
+ if(op==='sub'){a=rand(1,max);b=rand(1,a);ans=a-b}
+ if(op==='mul'){let m=level===1?10:level===2?12:level===3?15:20;a=rand(1,m);b=rand(1,m);ans=a*b}
+ if(op==='div'){b=rand(1,level===1?10:level===2?12:15);ans=rand(1,level===1?10:level===2?15:20);a=b*ans}
+ return {a,b,op,ans};
+}
+function render(){q=makeQuestion();answered=false;hintUsed=false;$('feedback').className='feedback';$('feedback').textContent='';$('answer').value='';$('answer').disabled=false;$('answer').focus();$('next').style.display='none';$('hint').style.display='inline-block';
+ const sym={add:'+',sub:'−',mul:'×',div:'÷'};$('equation').innerHTML=`${q.a} <span class="op">${sym[q.op]}</span> ${q.b} = ?`;$('topicLabel').textContent=modes[mode];$('level').textContent=`LEVEL ${level} · ${['MUDAH','MENENGAH','MENANTANG','MAHIR'][level-1]}`;$('count').textContent=`${Math.min(count,10)} / 10`;$('bar').style.width=((count-1)%10)*10+'%';$('score').textContent=score;$('correct').textContent=correct;$('streak').textContent=streak;
+}
+function play(kind){if(!soundOn)return;try{let AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;let ac=play.ac||(play.ac=new AC());if(ac.state==='suspended')ac.resume();let notes=kind==='good'?[660,880,1100]:[260,190];notes.forEach((freq,i)=>{let o=ac.createOscillator(),g=ac.createGain();o.type=kind==='good'?'sine':'triangle';o.frequency.setValueAtTime(freq,ac.currentTime+i*.12);g.gain.setValueAtTime(.0001,ac.currentTime+i*.12);g.gain.exponentialRampToValueAtTime(.12,ac.currentTime+i*.12+.025);g.gain.exponentialRampToValueAtTime(.0001,ac.currentTime+i*.12+.17);o.connect(g);g.connect(ac.destination);o.start(ac.currentTime+i*.12);o.stop(ac.currentTime+i*.12+.19)})}catch(e){}}
+function explain(){let {a,b,op,ans}=q;if(op==='add')return `${a} + ${b}: mulai dari ${a}, lalu tambahkan ${b}. Hasilnya ${ans}.`;if(op==='sub')return `${a} − ${b}: kurangi ${a} sebanyak ${b}. Hasilnya ${ans}.`;if(op==='mul')return `${a} × ${b}: artinya ${a} dijumlahkan sebanyak ${b} kali. Hasilnya ${ans}.`;return `${a} ÷ ${b}: cari angka yang jika dikalikan ${b} menghasilkan ${a}. Karena ${b} × ${ans} = ${a}, hasilnya ${ans}.`}
+$('form').addEventListener('submit',e=>{e.preventDefault();if(answered)return;let raw=$('answer').value.trim();if(raw==='')return;let val=Number(raw),fb=$('feedback');answered=true;$('answer').disabled=true;$('hint').style.display='none';
+if(Number.isFinite(val)&&Number.isInteger(val)&&val===q.ans){score+=10+(hintUsed?0:2);correct++;streak++;fb.className='feedback good';fb.innerHTML=`<b>🎉 Hebat! Jawabanmu benar.</b><div class="explain">${explain()}</div>`;play('good')}
+else{streak=0;fb.className='feedback bad';let message=!Number.isFinite(val)||!Number.isInteger(val)?'Masukkan bilangan bulat.':`Jawabanmu ${val}, sedangkan hasil yang benar adalah ${q.ans}.`;fb.innerHTML=`<b>💪 Belum tepat, ayo pelajari lagi!</b><div class="explain">${message}<br>${explain()}</div>`;play('bad')}
+$('score').textContent=score;$('correct').textContent=correct;$('streak').textContent=streak;$('next').style.display='inline-block';$('next').textContent=count%10===0?'Mulai sesi berikutnya →':'Soal berikutnya →';$('bar').style.width=(count%10)*10+'%';
+});
+$('hint').onclick=()=>{if(hintUsed)return;hintUsed=true;let fb=$('feedback');fb.className='feedback';fb.style.display='block';fb.textContent=q.op==='add'?`Petunjuk: pecah ${q.b} menjadi beberapa angka yang lebih mudah ditambahkan.`:q.op==='sub'?`Petunjuk: hitung mundur dari ${q.a} sebanyak ${q.b} langkah.`:q.op==='mul'?`Petunjuk: ${q.a} × ${q.b} sama dengan ${q.a} dijumlahkan sebanyak ${q.b} kali.`:`Petunjuk: pikirkan angka yang jika dikalikan ${q.b} hasilnya ${q.a}.`;};
+$('next').onclick=()=>{count++;if(count>10){count=1;level=Math.min(4,level+1);streak=0}render()};
+document.querySelectorAll('.topic').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.topic').forEach(x=>x.classList.remove('active'));btn.classList.add('active');mode=btn.dataset.mode;count=1;level=1;render()});
+$('soundBtn').onclick=()=>{soundOn=!soundOn;$('soundBtn').textContent=soundOn?'🔊 Suara: Aktif':'🔇 Suara: Mati';if(soundOn)play('good')};
+render();
+})();
+</script></body></html>
